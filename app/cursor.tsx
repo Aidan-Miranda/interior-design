@@ -9,9 +9,7 @@ export default function Cursor() {
 
   useEffect(() => {
     // wait for 0.5 seconds before showing the cursor
-    setTimeout(() => {
       setClientReady(true);
-    }, 500);
   }, []);
 
   const scrollY = typeof window !== "undefined" ? window.scrollY : 0;
@@ -35,11 +33,11 @@ export default function Cursor() {
         opacity: 1,
       }}
       transition={{
-        width: { duration: 1.5 },
-        height: { duration: 1.5 },
+        width: { duration: 0.5 },
+        height: { duration: 0.5 },
         opacity: { duration: 1.5 },
         type: "spring",
-        damping: 6,
+        damping: 12,
         stiffness: 100,
         restDelta: 0.02,
       }}

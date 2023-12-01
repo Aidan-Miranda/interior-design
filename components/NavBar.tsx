@@ -7,8 +7,7 @@ import {
   useMotionValueEvent,
   useScroll,
 } from "framer-motion";
-import Link from "next/link";
-import Image from "next/image";
+import { Link, animateScroll as scroll } from "react-scroll";
 import Logo from "@/public/Aidan Miranda.png";
 
 const navLinks = [
@@ -18,15 +17,15 @@ const navLinks = [
   },
   {
     name: "What we do",
-    href: "/home",
+    href: "/#about",
   },
   {
     name: "Gallery",
-    href: "/",
+    href: "/#gallery",
   },
   {
     name: "Contact",
-    href: "/",
+    href: "/#contact",
   },
 ];
 
@@ -94,16 +93,28 @@ export default function NavBar() {
         }}
         animate={hidden ? "hidden" : "visible"}
         transition={{ duration: 0.5, ease: "easeInOut" }}
-        className="fixed top-0 text-gray-50 bg-neutral-950 w-full h-[10vh] gap-8 font-generalSansLight text-xl z-20 flex items-center justify-end px-8 lg:px-14"
+        className="fixed top-0 text-gray-50 bg-neutral-950 w-full h-[10vh] gap-8 font-generalSansLight text:md lg:text-xl z-20 flex items-center justify-end px-8 lg:px-14"
       >
-        <Image
+        <motion.img
           src={Logo.src}
           width={160}
           height={160}
           alt="logo"
-          className="absolute left-10 invert"
+          onClick={() => window.scrollTo(0, 0)}
+          className="absolute left-8 invert cursor-pointer"
+          whileHover={{
+            scale: 1.1,
+          }}
         />
-        <div>Contact</div>
+        <motion.a
+          href={"/#contact"}
+          className="cursor-pointer"
+          whileHover={{
+            scale: 1.1,
+          }}
+        >
+          Contact
+        </motion.a>
         <motion.div
           onClick={toggleMenu}
           className="cursor-pointer"
@@ -195,7 +206,7 @@ const NavLink: React.FC<NavLinkProps> = ({ name, href }) => {
       }}
       className="font-generalSansMedium text-6xl text-center underlined underlined--thin"
     >
-      <Link href={href}>{name}</Link>
+      <a href={href}>{name}</a>
     </motion.div>
   );
 };
